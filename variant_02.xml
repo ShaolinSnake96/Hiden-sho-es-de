@@ -1,0 +1,1311 @@
+<!--
+    Variant 01 - Horizontal carousel and textlist
+-->
+
+<theme>
+    <transitions>instant</transitions>
+
+    <include>./navigationsounds.xml</include>
+    <include>./colors.xml</include>
+    <include>./metadata/${system.theme}.xml</include>
+
+    <!-- Per-system band colors and platform info -->
+    <include>./${system.theme}/colors.xml</include>
+    <include>./${system.theme}/systeminfo.xml</include>
+
+    <variables>
+        <systemConsoleImage>./${system.theme}/images/consolegame.svg</systemConsoleImage>
+        <systemControllerImage>./${system.theme}/images/controller.svg</systemControllerImage>
+        <systemLogo>./${system.theme}/images/logo.svg</systemLogo>
+    </variables>
+
+
+    <view name="system">
+        <image name="systemlistbg">
+            <pos>0.5 0.5</pos>
+            <origin>0.5 0.5</origin>
+            <size>1 1</size>
+            <path>./Assets/16-9/${systemlistbg}</path>
+            <zIndex>10</zIndex>  
+        </image>
+        <grid name="systemGrid">
+            <pos>0.51 0.55</pos>
+            <size>0.27 0.42</size>
+            <origin>0.5 0.5</origin>
+            <staticImage>./${system.theme}/images/logo.svg</staticImage>
+            <itemSize>0.27 0.07</itemSize>
+            <itemScale>1</itemScale>
+            <itemSpacing>0.022 -1</itemSpacing>
+            <fractionalRows>false</fractionalRows>
+            <itemTransitions>animated</itemTransitions>
+            <rowTransitions>instant</rowTransitions>
+            <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+            <imageRelativeScale>0.9</imageRelativeScale>
+            <imageFit>contain</imageFit>
+            <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+            <backgroundRelativeScale>1.0</backgroundRelativeScale>
+            <backgroundColor>ffffff</backgroundColor>
+            <selectorImage>./Assets/${itemselected}</selectorImage>
+            <selectorRelativeScale>1.1</selectorRelativeScale>
+            <selectorLayer>middle</selectorLayer>
+            <textRelativeScale>0.65</textRelativeScale>
+            <textColor>1c1c1c</textColor>
+            <textSelectedColor>ffffff</textSelectedColor>
+            <fontPath>./core/fonts/amanojaku.otf</fontPath>
+            <fontSize>0.025</fontSize>
+            <lineSpacing>1.2</lineSpacing>
+            <fadeAbovePrimary>false</fadeAbovePrimary>
+            <textHorizontalScrolling>true</textHorizontalScrolling>
+            <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+        </grid>
+        <gameselector name="select">
+            <selection>random</selection>
+            <gameCount>8</gameCount>
+            <allowDuplicates>true</allowDuplicates>
+        </gameselector>
+
+        <video name="gamedisplay">
+            <imageType>titlescreen, screenshot</imageType>
+            <maxSize>0.58 0.28</maxSize>
+            <origin>0.5 0.5</origin>
+            <pos>0.207 0.558</pos>
+            <pillarboxes>false</pillarboxes>
+            <zIndex>100</zIndex>
+        </video>
+        <text name="SystemDesc">
+            <pos>0.802 0.55</pos>
+            <size>0.2 0.42</size>
+            <text>${systemDescription}</text>
+            <origin>0.5 0.5</origin>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <fontSize>0.025</fontSize>
+            <horizontalAlignment>left</horizontalAlignment>
+            <letterCase>uppercase</letterCase>
+            <color>${gamelistDefaultTextColor}</color>
+            <container>true</container>
+            <containerVerticalSnap>true</containerVerticalSnap>
+            <containerScrollSpeed>1</containerScrollSpeed>
+            <containerStartDelay>2.5</containerStartDelay>
+            <containerResetDelay>4</containerResetDelay>
+            <zIndex>150</zIndex>
+        </text>
+        <text name="SystemReleaseDate">
+            <pos>0.8 0.356</pos>
+            <size>0.35 0.21</size>
+            <text>${systemReleaseDateFormated}</text>
+            <origin>0.5 0.5</origin>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <fontSize>0.027</fontSize>
+            <horizontalAlignment>center</horizontalAlignment>
+            <letterCase>uppercase</letterCase>
+            <color>ffffff</color>
+            <container>true</container>
+            <containerVerticalSnap>true</containerVerticalSnap>
+            <containerScrollSpeed>1</containerScrollSpeed>
+            <containerStartDelay>2.5</containerStartDelay>
+            <containerResetDelay>4</containerResetDelay>
+            <zIndex>150</zIndex>
+        </text>
+        <text name="gameCounter">
+            <pos>0.21 0.75</pos>
+            <size>1 0.056</size>
+            <origin>0.5 0.5</origin>
+            <systemdata>gamecount</systemdata>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <fontSize>0.035</fontSize>
+            <horizontalAlignment>center</horizontalAlignment>
+            <color>161616</color>
+            <backgroundColor>00000000</backgroundColor>
+            <letterCase>uppercase</letterCase>
+            <zIndex>50</zIndex>
+        </text>
+        <image name="systemhelp">
+            <pos>0.525 0.95</pos>
+            <origin>0.5 0.5</origin>
+            <maxSize>0.8 0.065</maxSize>
+            <path>./help/sys_ps.png</path>
+            <zIndex>100</zIndex>  
+        </image>
+        <systemstatus name="status">
+            <pos>${statuspos}</pos>
+            <origin>0.5 0.5</origin>
+            <height>0.05</height>
+            <color>000000</color>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+            <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+            <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+            <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+            <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+            <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+            <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+        </systemstatus>
+        <clock name="menuclock">
+            <pos>0.25 0.05</pos>
+            <origin>0.5 0.5</origin>
+            <color>000000</color>
+            <fontSize>0.044</fontSize>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+        </clock>
+    </view>
+    <view name="gamelist">
+        <image name="gameelistbg">
+            <pos>0.5 0.5</pos>
+            <origin>0.5 0.5</origin>
+            <size>1 1</size>
+            <path>./Assets/16-9/${gamelistbg}</path>
+            <zIndex>10</zIndex>  
+        </image>
+        <grid name="gamelistGrid">
+            <pos>0.18 0.55</pos>
+            <size>0.27 0.75</size>
+            <origin>0.5 0.5</origin>
+            <itemSize>0.27 0.07</itemSize>
+            <itemScale>1</itemScale>
+            <itemSpacing>0.022 0.02</itemSpacing>
+            <fractionalRows>false</fractionalRows>
+            <itemTransitions>animated</itemTransitions>
+            <rowTransitions>instant</rowTransitions>
+            <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+            <imageRelativeScale>0.9</imageRelativeScale>
+            <imageType>none</imageType>
+            <imageFit>contain</imageFit>
+            <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+            <backgroundRelativeScale>1.0</backgroundRelativeScale>
+            <backgroundColor>ffffff</backgroundColor>
+            <selectorImage>./Assets/${itemselected}</selectorImage>
+            <selectorRelativeScale>1.1</selectorRelativeScale>
+            <selectorLayer>middle</selectorLayer>
+            <textRelativeScale>0.65</textRelativeScale>
+            <textColor>1c1c1c</textColor>
+            <textSelectedColor>ffffff</textSelectedColor>
+            <fontPath>./core/fonts/amanojaku.otf</fontPath>
+            <fontSize>0.028</fontSize>
+            <lineSpacing>1.2</lineSpacing>
+            <fadeAbovePrimary>false</fadeAbovePrimary>
+            <textHorizontalScrolling>true</textHorizontalScrolling>
+            <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+        </grid>
+        <helpsystem name="help">
+            <pos>0.012 0.955</pos>
+            <textColor>${gamelistHelpColor}</textColor>
+            <iconColor>${gamelistHelpColor}</iconColor>
+            <textColorDimmed>${gamelistHelpColorDimmed}</textColorDimmed>
+            <iconColorDimmed>${gamelistHelpColorDimmed}</iconColorDimmed>
+            <fontSize>0.035</fontSize>
+        </helpsystem>
+    </view>
+
+        
+    <view name="gamelist">
+        <video name="gameVideo">
+            <maxSize>0.58 0.28</maxSize>
+            <origin>0.5 0.5</origin>
+            <pos>0.497 0.4728</pos>
+            <pillarboxes>false</pillarboxes>
+            <zIndex>100</zIndex>
+            <imageType>screenshot</imageType>
+            <interpolation>nearest</interpolation>
+            <delay>1.7</delay>
+            <scrollFadeIn>true</scrollFadeIn>
+        </video>
+        <image name="logo">
+            <pos>0.78 0.17</pos>
+            <maxSize>0.32 0.13</maxSize>
+            <origin>1 1</origin>
+            <path>${systemLogo}</path>
+        </image>
+        <image name="marquee">
+            <pos>0.495 0.78</pos>
+            <origin>0.5 0.5</origin>
+            <maxSize>0.2 0.1</maxSize>
+            <imageType>marquee</imageType>
+            <color>ffffff</color>
+            <zIndex>100</zIndex>
+        </image>
+ 
+        <text name="description">
+            <pos>0.825 0.645</pos>
+            <size>0.2 0.42</size>
+            <metadata>description</metadata>
+            <origin>0.5 0.5</origin>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <fontSize>0.025</fontSize>
+            <horizontalAlignment>left</horizontalAlignment>
+            <letterCase>uppercase</letterCase>
+            <color>${gamelistDefaultTextColor}</color>
+            <container>true</container>
+            <containerVerticalSnap>true</containerVerticalSnap>
+            <containerScrollSpeed>1</containerScrollSpeed>
+            <containerStartDelay>2.5</containerStartDelay>
+            <containerResetDelay>4</containerResetDelay>
+            <zIndex>150</zIndex>
+        </text>
+        <text name="systemNames">
+            <text>${system.name}</text>
+            <pos>0.5 0.17</pos>
+            <size>0.172 0.05</size>
+            <origin>0.5 0.5</origin>
+            <horizontalAlignment>center</horizontalAlignment>
+            <fontPath>./core/fonts/amanojaku.otf</fontPath>
+            <fontSize>0.028</fontSize>
+            <color>000000</color>
+            <letterCase>uppercase</letterCase>
+            <container>true</container>
+            <containerType>horizontal</containerType>
+            <zIndex>60</zIndex>
+        </text>
+        <datetime name="releasedate">
+            <pos>0.796 0.247</pos>
+            <metadata>releasedate</metadata>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <fontSize>0.035</fontSize>
+            <horizontalAlignment>center</horizontalAlignment>
+            <color>ffffff</color>
+        </datetime>
+        <text name="developer">
+            <size>0.2 0.05</size>
+            <pos>0.825 0.35</pos>
+            <origin>0.5 0.5</origin>
+            <metadata>developer</metadata>
+            <fontPath>./core/fonts/amanojaku.otf</fontPath>
+            <fontSize>0.031</fontSize>
+            <horizontalAlignment>center</horizontalAlignment>
+        </text>
+        <text name="genre">
+            <size>0.2 0.05</size>
+            <pos>0.825 0.39</pos>
+            <origin>0.5 0.5</origin>
+            <metadata>genre</metadata>
+            <fontPath>./core/fonts/amanojaku.otf</fontPath>
+            <fontSize>0.031</fontSize>
+            <horizontalAlignment>center</horizontalAlignment>
+        </text>
+        <rating name="rating">
+            <pos>0.435 0.22</pos>
+            <size>0 0.04</size>
+            <interpolation>nearest</interpolation>
+            <color>ffffff</color>
+            <filledPath>${ratingfilled}</filledPath>
+            <unfilledPath>${ratingempty}</unfilledPath>
+            <overlay>false</overlay>
+        </rating>
+        <badges name="badgesF">
+            <pos>0.76 0.87</pos>
+            <size>0.13 0.11</size>
+            <horizontalAlignment>center</horizontalAlignment>
+            <direction>row</direction>
+            <lines>3</lines>
+            <itemsPerLine>3</itemsPerLine>
+            <slots>favorite, completed, manual</slots>
+            <controllerPos>0.5 0.572</controllerPos>
+            <controllerSize>0.81</controllerSize>
+            <folderLinkPos>0.54 0.64</folderLinkPos>
+            <folderLinkSize>0.31</folderLinkSize>
+            <itemMargin>-1.0 0.005</itemMargin>
+            <customBadgeIcon badge="favorite">./customicons/favorite.png</customBadgeIcon>
+            <customBadgeIcon badge="completed">./customicons/completed.png</customBadgeIcon>
+            <customBadgeIcon badge="manual">./customicons/manual.png</customBadgeIcon>
+        
+        </badges>
+        <image name="systemhelp">
+            <pos>0.525 0.95</pos>
+            <origin>0.5 0.5</origin>
+            <maxSize>0.8 0.065</maxSize>
+            <path>./help/game_ps.png</path>
+            <zIndex>100</zIndex>  
+        </image>
+        <systemstatus name="status">
+            <pos>${statuspos}</pos>
+            <origin>0.5 0.5</origin>
+            <height>0.05</height>
+            <color>000000</color>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+            <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+            <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+            <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+            <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+            <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+            <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+        </systemstatus>
+        <clock name="menuclock">
+            <pos>0.25 0.05</pos>
+            <origin>0.5 0.5</origin>
+            <color>000000</color>
+            <fontSize>0.044</fontSize>
+            <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+        </clock>
+    </view>
+
+    <aspectRatio name="4:3">
+        <view name="system">
+                <image name="systemlistbg">
+                    <pos>0.5 0.5</pos>
+                    <origin>0.5 0.5</origin>
+                    <size>1 1</size>
+                    <path>./Assets/4-3/${systemlistbg}</path>
+                    <zIndex>10</zIndex>  
+                </image>
+                <grid name="systemGrid">
+                    <pos>0.3 0.55</pos>
+                    <size>0.40 0.7</size>
+                    <origin>0.5 0.5</origin>
+                    <staticImage>./${system.theme}/images/logo.svg</staticImage>
+                    <itemSize>0.40 0.11</itemSize>
+                    <itemScale>1</itemScale>
+                    <itemSpacing>0.022 0.00000001</itemSpacing>
+                    <fractionalRows>false</fractionalRows>
+                    <itemTransitions>animated</itemTransitions>
+                    <rowTransitions>instant</rowTransitions>
+                    <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+                    <imageRelativeScale>0.9</imageRelativeScale>
+                    <imageFit>contain</imageFit>
+                    <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+                    <backgroundRelativeScale>1.0</backgroundRelativeScale>
+                    <backgroundColor>ffffff</backgroundColor>
+                    <selectorImage>./Assets/${itemselected}</selectorImage>
+                    <selectorRelativeScale>1.1</selectorRelativeScale>
+                    <selectorLayer>middle</selectorLayer>
+                    <textRelativeScale>0.65</textRelativeScale>
+                    <textColor>1c1c1c</textColor>
+                    <textSelectedColor>ffffff</textSelectedColor>
+                    <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                    <fontSize>0.037</fontSize>
+                    <lineSpacing>1.2</lineSpacing>
+                    <fadeAbovePrimary>false</fadeAbovePrimary>
+                    <textHorizontalScrolling>true</textHorizontalScrolling>
+                    <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+                </grid>
+                <gameselector name="select">
+                    <selection>random</selection>
+                    <gameCount>8</gameCount>
+                    <allowDuplicates>true</allowDuplicates>
+                </gameselector>
+
+                <video name="gamedisplay">
+                    <imageType>titlescreen, screenshot</imageType>
+                    <maxSize>0.58 0.28</maxSize>
+                    <origin>0.5 0.5</origin>
+                    <pos>0.207 0.558</pos>
+                    <pillarboxes>false</pillarboxes>
+                    <zIndex>100</zIndex>
+                    <visible>false</visible>
+                </video>
+                <text name="SystemDesc">
+                    <pos>0.7 0.55</pos>
+                    <size>0.3 0.6</size>
+                    <text>${systemDescription}</text>
+                    <origin>0.5 0.5</origin>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <fontSize>0.033</fontSize>
+                    <horizontalAlignment>left</horizontalAlignment>
+                    <letterCase>uppercase</letterCase>
+                    <color>${gamelistDefaultTextColor}</color>
+                    <container>true</container>
+                    <containerVerticalSnap>true</containerVerticalSnap>
+                    <containerScrollSpeed>1</containerScrollSpeed>
+                    <containerStartDelay>2.5</containerStartDelay>
+                    <containerResetDelay>4</containerResetDelay>
+                    <zIndex>150</zIndex>
+                </text>
+                <text name="SystemReleaseDate">
+                    <pos>0.2 0.356</pos>
+                    <size>0.35 0.21</size>
+                    <text>${systemReleaseDateFormated}</text>
+                    <origin>0.5 0.5</origin>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <fontSize>0.027</fontSize>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <letterCase>uppercase</letterCase>
+                    <color>ffffff</color>
+                    <container>true</container>
+                    <containerVerticalSnap>true</containerVerticalSnap>
+                    <containerScrollSpeed>1</containerScrollSpeed>
+                    <containerStartDelay>2.5</containerStartDelay>
+                    <containerResetDelay>4</containerResetDelay>
+                    <visible>false</visible>
+                    <zIndex>150</zIndex>
+                </text>
+                <text name="gameCounter">
+                    <pos>0.3 0.15</pos>
+                    <size>1 0.056</size>
+                    <origin>0.5 0.5</origin>
+                    <systemdata>gamecount</systemdata>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <fontSize>0.035</fontSize>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <color>161616</color>
+                    <backgroundColor>00000000</backgroundColor>
+                    <letterCase>uppercase</letterCase>
+                    <zIndex>50</zIndex>
+                </text>
+                <image name="systemhelp">
+                    <pos>0.525 0.95</pos>
+                    <origin>0.5 0.5</origin>
+                    <maxSize>0.8 0.065</maxSize>
+                    <path>./help/sys_ps.png</path>
+                    <zIndex>100</zIndex>  
+                </image>
+                <systemstatus name="status">
+                    <pos>${statuspos}</pos>
+                    <origin>0.5 0.5</origin>
+                    <height>0.05</height>
+                    <color>000000</color>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+                    <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+                    <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+                    <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+                    <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+                    <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+                    <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+                </systemstatus>
+                <clock name="menuclock">
+                    <pos>0.25 0.05</pos>
+                    <origin>0.5 0.5</origin>
+                    <color>000000</color>
+                    <fontSize>0.044</fontSize>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                </clock>
+            </view>
+            <view name="gamelist">
+                <image name="gamelistbg">
+                    <pos>0.5 0.5</pos>
+                    <origin>0.5 0.5</origin>
+                    <size>1 1</size>
+                    <path>./Assets/4-3/${gamelistbg}</path>
+                    <zIndex>10</zIndex>  
+                </image>
+                <grid name="gamelistGrid">
+                    <pos>0.25 0.55</pos>
+                    <size>0.39 0.65</size>
+                    <origin>0.5 0.5</origin>
+                    <itemSize>0.39 0.08</itemSize>
+                    <itemScale>1</itemScale>
+                    <itemSpacing>0.022 0</itemSpacing>
+                    <fractionalRows>false</fractionalRows>
+                    <itemTransitions>animated</itemTransitions>
+                    <rowTransitions>instant</rowTransitions>
+                    <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+                    <imageRelativeScale>0.9</imageRelativeScale>
+                    <imageType>none</imageType>
+                    <imageFit>contain</imageFit>
+                    <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+                    <backgroundRelativeScale>1.0</backgroundRelativeScale>
+                    <backgroundColor>ffffff</backgroundColor>
+                    <selectorImage>./Assets/${itemselected}</selectorImage>
+                    <selectorRelativeScale>1.1</selectorRelativeScale>
+                    <selectorLayer>middle</selectorLayer>
+                    <textRelativeScale>0.65</textRelativeScale>
+                    <textColor>1c1c1c</textColor>
+                    <textSelectedColor>ffffff</textSelectedColor>
+                    <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                    <fontSize>0.037</fontSize>
+                    <lineSpacing>1.2</lineSpacing>
+                    <fadeAbovePrimary>false</fadeAbovePrimary>
+                    <textHorizontalScrolling>true</textHorizontalScrolling>
+                    <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+                </grid>
+                <helpsystem name="help">
+                    <pos>0.012 0.955</pos>
+                    <textColor>${gamelistHelpColor}</textColor>
+                    <iconColor>${gamelistHelpColor}</iconColor>
+                    <textColorDimmed>${gamelistHelpColorDimmed}</textColorDimmed>
+                    <iconColorDimmed>${gamelistHelpColorDimmed}</iconColorDimmed>
+                    <fontSize>0.035</fontSize>
+                </helpsystem>
+            </view>
+
+                
+            <view name="gamelist">
+                <video name="gameVideo">
+                    <maxSize>0.5 0.28</maxSize>
+                    <origin>0.5 0.5</origin>
+                    <pos>0.68 0.425</pos>
+                    <pillarboxes>false</pillarboxes>
+                    <zIndex>100</zIndex>
+                    <imageType>screenshot</imageType>
+                    <interpolation>nearest</interpolation>
+                    <delay>1.7</delay>
+                    <scrollFadeIn>true</scrollFadeIn>
+                </video>
+                <image name="logo">
+                    <pos>0.78 0.17</pos>
+                    <maxSize>0.32 0.13</maxSize>
+                    <origin>1 1</origin>
+                    <path>${systemLogo}</path>
+                </image>
+                <image name="marquee">
+                    <pos>0.495 0.78</pos>
+                    <origin>0.5 0.5</origin>
+                    <maxSize>0.2 0.1</maxSize>
+                    <imageType>marquee</imageType>
+                    <color>ffffff</color>
+                    <zIndex>100</zIndex>
+                    <visible>false</visible>
+                </image>
+        
+                <text name="description">
+                    <pos>0.676 0.76</pos>
+                    <size>0.38 0.25</size>
+                    <metadata>description</metadata>
+                    <origin>0.5 0.5</origin>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <fontSize>0.033</fontSize>
+                    <horizontalAlignment>left</horizontalAlignment>
+                    <letterCase>uppercase</letterCase>
+                    <color>${gamelistDefaultTextColor}</color>
+                    <container>true</container>
+                    <containerVerticalSnap>true</containerVerticalSnap>
+                    <containerScrollSpeed>1</containerScrollSpeed>
+                    <containerStartDelay>2.5</containerStartDelay>
+                    <containerResetDelay>4</containerResetDelay>
+                    <zIndex>150</zIndex>
+                </text>
+                <text name="systemNames">
+                    <text>${system.name}</text>
+                    <pos>0.5 0.2</pos>
+                    <size>0.172 0.05</size>
+                    <origin>0.5 0.5</origin>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                    <fontSize>0.038</fontSize>
+                    <color>000000</color>
+                    <letterCase>uppercase</letterCase>
+                    <container>true</container>
+                    <containerType>horizontal</containerType>
+                    <zIndex>60</zIndex>
+                </text>
+                <datetime name="releasedate">
+                    <pos>0.796 0.247</pos>
+                    <metadata>releasedate</metadata>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <fontSize>0.035</fontSize>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <color>ffffff</color>
+                    <visible>false</visible>
+                </datetime>
+                <text name="developer">
+                    <size>0.2 0.05</size>
+                    <pos>0.825 0.35</pos>
+                    <origin>0.5 0.5</origin>
+                    <metadata>developer</metadata>
+                    <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                    <fontSize>0.031</fontSize>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <visible>false</visible>
+                </text>
+                <text name="genre">
+                    <size>0.2 0.05</size>
+                    <pos>0.825 0.39</pos>
+                    <origin>0.5 0.5</origin>
+                    <metadata>genre</metadata>
+                    <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                    <fontSize>0.031</fontSize>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <visible>false</visible>
+                </text>
+                <rating name="rating">
+                    <pos>0.435 0.22</pos>
+                    <size>0 0.04</size>
+                    <interpolation>nearest</interpolation>
+                    <color>ffffff</color>
+                    <filledPath>${ratingfilled}</filledPath>
+                    <unfilledPath>${ratingempty}</unfilledPath>
+                    <overlay>false</overlay>
+                    <visible>false</visible>
+                </rating>
+                <badges name="badgesF">
+                    <pos>0.625 0.23</pos>
+                    <size>0.13 0.11</size>
+                    <horizontalAlignment>center</horizontalAlignment>
+                    <direction>row</direction>
+                    <lines>3</lines>
+                    <itemsPerLine>3</itemsPerLine>
+                    <slots>favorite, completed, manual</slots>
+                    <controllerPos>0.5 0.572</controllerPos>
+                    <controllerSize>0.81</controllerSize>
+                    <folderLinkPos>0.54 0.64</folderLinkPos>
+                    <folderLinkSize>0.31</folderLinkSize>
+                    <itemMargin>-1.0 0.005</itemMargin>
+                    <customBadgeIcon badge="favorite">./customicons/favorite.png</customBadgeIcon>
+                    <customBadgeIcon badge="completed">./customicons/completed.png</customBadgeIcon>
+                    <customBadgeIcon badge="manual">./customicons/manual.png</customBadgeIcon>
+                
+                </badges>
+                <image name="systemhelp">
+                    <pos>0.525 0.95</pos>
+                    <origin>0.5 0.5</origin>
+                    <maxSize>0.8 0.065</maxSize>
+                    <path>./help/game_ps.png</path>
+                    <zIndex>100</zIndex>  
+                </image>
+                <systemstatus name="status">
+                    <pos>${statuspos}</pos>
+                    <origin>0.5 0.5</origin>
+                    <height>0.05</height>
+                    <color>000000</color>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                    <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+                    <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+                    <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+                    <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+                    <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+                    <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+                    <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+                </systemstatus>
+                <clock name="menuclock">
+                    <pos>0.25 0.05</pos>
+                    <origin>0.5 0.5</origin>
+                    <color>000000</color>
+                    <fontSize>0.044</fontSize>
+                    <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                </clock>
+            </view>       
+    </aspectRatio>
+
+    <aspectRatio name="19.5:9">
+        <view name="system">
+            <image name="systemlistbg">
+                <pos>0.5 0.5</pos>
+                <origin>0.5 0.5</origin>
+                <size>1 1</size>
+                <path>./Assets/phone/${systemlistbg}</path>
+                <zIndex>10</zIndex>  
+            </image>
+            <grid name="systemGrid">
+                <pos>0.499 0.568</pos>
+                <size>0.25 0.46</size>
+                <origin>0.5 0.5</origin>
+                <staticImage>./${system.theme}/images/logo.svg</staticImage>
+                <itemSize>0.25 0.07</itemSize>
+                <itemScale>1</itemScale>
+                <itemSpacing>0.022 -1</itemSpacing>
+                <fractionalRows>false</fractionalRows>
+                <itemTransitions>animated</itemTransitions>
+                <rowTransitions>instant</rowTransitions>
+                <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+                <imageRelativeScale>0.9</imageRelativeScale>
+                <imageFit>contain</imageFit>
+                <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+                <backgroundRelativeScale>1.0</backgroundRelativeScale>
+                <backgroundColor>ffffff</backgroundColor>
+                <selectorImage>./Assets/${itemselected}</selectorImage>
+                <selectorRelativeScale>1.1</selectorRelativeScale>
+                <selectorLayer>middle</selectorLayer>
+                <textRelativeScale>0.65</textRelativeScale>
+                <textColor>1c1c1c</textColor>
+                <textSelectedColor>ffffff</textSelectedColor>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.025</fontSize>
+                <lineSpacing>1.2</lineSpacing>
+                <fadeAbovePrimary>false</fadeAbovePrimary>
+                <textHorizontalScrolling>true</textHorizontalScrolling>
+                <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+            </grid>
+            <gameselector name="select">
+                <selection>random</selection>
+                <gameCount>8</gameCount>
+                <allowDuplicates>true</allowDuplicates>
+            </gameselector>
+
+            <video name="gamedisplay">
+                <imageType>titlescreen, screenshot</imageType>
+                <maxSize>0.6 0.33</maxSize>
+                <origin>0.5 0.5</origin>
+                <pos>0.202 0.485</pos>
+                <pillarboxes>false</pillarboxes>
+                <zIndex>100</zIndex>
+            </video>
+            <text name="SystemDesc">
+                <pos>0.817 0.63</pos>
+                <size>0.215 0.487</size>
+                <text>${systemDescription}</text>
+                <origin>0.5 0.5</origin>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.025</fontSize>
+                <horizontalAlignment>left</horizontalAlignment>
+                <letterCase>uppercase</letterCase>
+                <color>${gamelistDefaultTextColor}</color>
+                <container>true</container>
+                <containerVerticalSnap>true</containerVerticalSnap>
+                <containerScrollSpeed>1</containerScrollSpeed>
+                <containerStartDelay>2.5</containerStartDelay>
+                <containerResetDelay>4</containerResetDelay>
+                <zIndex>150</zIndex>
+            </text>
+            <text name="SystemReleaseDate">
+                <pos>0.82 0.3547</pos>
+                <size>0.35 0.21</size>
+                <text>${systemReleaseDateFormated}</text>
+                <origin>0.5 0.5</origin>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.031</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+                <letterCase>uppercase</letterCase>
+                <color>ffffff</color>
+                <container>true</container>
+                <containerVerticalSnap>true</containerVerticalSnap>
+                <containerScrollSpeed>1</containerScrollSpeed>
+                <containerStartDelay>2.5</containerStartDelay>
+                <containerResetDelay>4</containerResetDelay>
+                <zIndex>150</zIndex>
+            </text>
+            <text name="gameCounter">
+                <pos>0.21 0.75</pos>
+                <size>1 0.056</size>
+                <origin>0.5 0.5</origin>
+                <systemdata>gamecount</systemdata>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.035</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+                <color>161616</color>
+                <backgroundColor>00000000</backgroundColor>
+                <letterCase>uppercase</letterCase>
+                <zIndex>50</zIndex>
+            </text>
+            <image name="systemhelp">
+                <pos>0.525 0.958</pos>
+                <origin>0.5 0.5</origin>
+                <maxSize>0.8 0.06</maxSize>
+                <path>./help/sys_ps.png</path>
+                <zIndex>100</zIndex>  
+            </image>
+            <systemstatus name="status">
+                <pos>0.5 0.035</pos>
+                <origin>0.5 0.5</origin>
+                <height>0.05</height>
+                <color>000000</color>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+                <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+                <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+                <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+                <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+                <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+                <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+            </systemstatus>
+            <clock name="menuclock">
+                <pos>0.3 0.035</pos>
+                <origin>0.5 0.5</origin>
+                <color>000000</color>
+                <fontSize>0.044</fontSize>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            </clock>
+        </view>
+        <view name="gamelist">
+            <image name="gamelistbg">
+                <pos>0.5 0.5</pos>
+                <origin>0.5 0.5</origin>
+                <size>1 1</size>
+                <path>./Assets/phone/${gamelistbg}</path>
+                <zIndex>10</zIndex>  
+            </image>
+            <grid name="gamelistGrid">
+                <pos>0.18 0.518</pos>
+                <size>0.25 0.75</size>
+                <origin>0.5 0.5</origin>
+                <itemSize>0.25 0.07</itemSize>
+                <itemScale>1</itemScale>
+                <itemSpacing>0.022 0.02</itemSpacing>
+                <fractionalRows>false</fractionalRows>
+                <itemTransitions>animated</itemTransitions>
+                <rowTransitions>instant</rowTransitions>
+                <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+                <imageRelativeScale>0.9</imageRelativeScale>
+                <imageType>none</imageType>
+                <imageFit>contain</imageFit>
+                <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+                <backgroundRelativeScale>1.0</backgroundRelativeScale>
+                <backgroundColor>ffffff</backgroundColor>
+                <selectorImage>./Assets/${itemselected}</selectorImage>
+                <selectorRelativeScale>1.1</selectorRelativeScale>
+                <selectorLayer>middle</selectorLayer>
+                <textRelativeScale>0.65</textRelativeScale>
+                <textColor>1c1c1c</textColor>
+                <textSelectedColor>ffffff</textSelectedColor>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.028</fontSize>
+                <lineSpacing>1.2</lineSpacing>
+                <fadeAbovePrimary>false</fadeAbovePrimary>
+                <textHorizontalScrolling>true</textHorizontalScrolling>
+                <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+            </grid>
+            <helpsystem name="help">
+                <pos>0.012 0.955</pos>
+                <textColor>${gamelistHelpColor}</textColor>
+                <iconColor>${gamelistHelpColor}</iconColor>
+                <textColorDimmed>${gamelistHelpColorDimmed}</textColorDimmed>
+                <iconColorDimmed>${gamelistHelpColorDimmed}</iconColorDimmed>
+                <fontSize>0.035</fontSize>
+            </helpsystem>
+        </view>
+
+            
+        <view name="gamelist">
+            <video name="gameVideo">
+                <maxSize>0.6 0.33</maxSize>
+                <origin>0.5 0.5</origin>
+                <pos>0.5 0.42</pos>
+                <pillarboxes>false</pillarboxes>
+                <zIndex>100</zIndex>
+                <imageType>screenshot</imageType>
+                <interpolation>nearest</interpolation>
+                <delay>1.7</delay>
+                <scrollFadeIn>true</scrollFadeIn>
+            </video>
+            <image name="logo">
+                <pos>0.78 0.17</pos>
+                <maxSize>0.32 0.13</maxSize>
+                <origin>1 1</origin>
+                <path>${systemLogo}</path>
+            </image>
+            <image name="marquee">
+                <pos>0.495 0.8</pos>
+                <origin>0.5 0.5</origin>
+                <maxSize>0.26 0.13</maxSize>
+                <imageType>marquee</imageType>
+                <color>ffffff</color>
+                <zIndex>100</zIndex>
+            </image>
+    
+            <text name="description">
+                <pos>0.825 0.637</pos>
+                <size>0.21 0.458</size>
+                <metadata>description</metadata>
+                <origin>0.5 0.5</origin>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.025</fontSize>
+                <horizontalAlignment>left</horizontalAlignment>
+                <letterCase>uppercase</letterCase>
+                <color>${gamelistDefaultTextColor}</color>
+                <container>true</container>
+                <containerVerticalSnap>true</containerVerticalSnap>
+                <containerScrollSpeed>1</containerScrollSpeed>
+                <containerStartDelay>2.5</containerStartDelay>
+                <containerResetDelay>4</containerResetDelay>
+                <zIndex>150</zIndex>
+            </text>
+            <text name="systemNames">
+                <text>${system.name}</text>
+                <pos>0.5 0.17</pos>
+                <size>0.172 0.05</size>
+                <origin>0.5 0.5</origin>
+                <horizontalAlignment>center</horizontalAlignment>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.028</fontSize>
+                <color>000000</color>
+                <letterCase>uppercase</letterCase>
+                <container>true</container>
+                <containerType>horizontal</containerType>
+                <zIndex>60</zIndex>
+            </text>
+            <datetime name="releasedate">
+                <pos>0.796 0.2</pos>
+                <metadata>releasedate</metadata>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.035</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+                <color>ffffff</color>
+            </datetime>
+            <text name="developer">
+                <size>0.2 0.05</size>
+                <pos>0.825 0.32</pos>
+                <origin>0.5 0.5</origin>
+                <metadata>developer</metadata>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.031</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+            </text>
+            <text name="genre">
+                <size>0.2 0.05</size>
+                <pos>0.825 0.365</pos>
+                <origin>0.5 0.5</origin>
+                <metadata>genre</metadata>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.031</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+            </text>
+            <rating name="rating">
+                <pos>0.435 0.22</pos>
+                <size>0 0.04</size>
+                <interpolation>nearest</interpolation>
+                <color>ffffff</color>
+                <filledPath>${ratingfilled}</filledPath>
+                <unfilledPath>${ratingempty}</unfilledPath>
+                <overlay>false</overlay>
+                <visible>false</visible>
+            </rating>
+            <badges name="badgesF">
+                <pos>0.76 0.885</pos>
+                <size>0.13 0.11</size>
+                <horizontalAlignment>center</horizontalAlignment>
+                <direction>row</direction>
+                <lines>3</lines>
+                <itemsPerLine>3</itemsPerLine>
+                <slots>favorite, completed, manual</slots>
+                <controllerPos>0.5 0.572</controllerPos>
+                <controllerSize>0.81</controllerSize>
+                <folderLinkPos>0.54 0.64</folderLinkPos>
+                <folderLinkSize>0.31</folderLinkSize>
+                <itemMargin>-1.0 0.005</itemMargin>
+                <customBadgeIcon badge="favorite">./customicons/favorite.png</customBadgeIcon>
+                <customBadgeIcon badge="completed">./customicons/completed.png</customBadgeIcon>
+                <customBadgeIcon badge="manual">./customicons/manual.png</customBadgeIcon>
+            
+            </badges>
+            <image name="systemhelp">
+                <pos>0.525 0.958</pos>
+                <origin>0.5 0.5</origin>
+                <maxSize>0.8 0.06</maxSize>
+                <path>./help/game_ps.png</path>
+                <zIndex>100</zIndex>  
+            </image>
+            <systemstatus name="status">
+                <pos>0.5 0.035</pos>
+                <origin>0.5 0.5</origin>
+                <height>0.05</height>
+                <color>000000</color>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+                <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+                <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+                <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+                <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+                <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+                <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+            </systemstatus>
+            <clock name="menuclock">
+                <pos>0.3 0.035</pos>
+                <origin>0.5 0.5</origin>
+                <color>000000</color>
+                <fontSize>0.044</fontSize>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            </clock>
+        </view>
+    </aspectRatio>
+
+        <aspectRatio name="16:10">
+        <view name="system">
+            <image name="systemlistbg">
+                <pos>0.5 0.5</pos>
+                <origin>0.5 0.5</origin>
+                <size>1 1</size>
+                <path>./Assets/16-9/${systemlistbg}</path>
+                <zIndex>10</zIndex>  
+            </image>
+            <grid name="systemGrid">
+                <pos>0.51 0.55</pos>
+                <size>0.27 0.42</size>
+                <origin>0.5 0.5</origin>
+                <staticImage>./${system.theme}/images/logo.svg</staticImage>
+                <itemSize>0.27 0.07</itemSize>
+                <itemScale>1</itemScale>
+                <itemSpacing>0.022 -1</itemSpacing>
+                <fractionalRows>false</fractionalRows>
+                <itemTransitions>animated</itemTransitions>
+                <rowTransitions>instant</rowTransitions>
+                <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+                <imageRelativeScale>0.9</imageRelativeScale>
+                <imageFit>contain</imageFit>
+                <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+                <backgroundRelativeScale>1.0</backgroundRelativeScale>
+                <backgroundColor>ffffff</backgroundColor>
+                <selectorImage>./Assets/${itemselected}</selectorImage>
+                <selectorRelativeScale>1.1</selectorRelativeScale>
+                <selectorLayer>middle</selectorLayer>
+                <textRelativeScale>0.65</textRelativeScale>
+                <textColor>1c1c1c</textColor>
+                <textSelectedColor>ffffff</textSelectedColor>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.025</fontSize>
+                <lineSpacing>1.2</lineSpacing>
+                <fadeAbovePrimary>false</fadeAbovePrimary>
+                <textHorizontalScrolling>true</textHorizontalScrolling>
+                <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+            </grid>
+            <gameselector name="select">
+                <selection>random</selection>
+                <gameCount>8</gameCount>
+                <allowDuplicates>true</allowDuplicates>
+            </gameselector>
+
+            <video name="gamedisplay">
+                <imageType>titlescreen, screenshot</imageType>
+                <maxSize>0.58 0.28</maxSize>
+                <origin>0.5 0.5</origin>
+                <pos>0.207 0.558</pos>
+                <pillarboxes>false</pillarboxes>
+                <zIndex>100</zIndex>
+            </video>
+            <text name="SystemDesc">
+                <pos>0.802 0.55</pos>
+                <size>0.2 0.42</size>
+                <text>${systemDescription}</text>
+                <origin>0.5 0.5</origin>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.025</fontSize>
+                <horizontalAlignment>left</horizontalAlignment>
+                <letterCase>uppercase</letterCase>
+                <color>${gamelistDefaultTextColor}</color>
+                <container>true</container>
+                <containerVerticalSnap>true</containerVerticalSnap>
+                <containerScrollSpeed>1</containerScrollSpeed>
+                <containerStartDelay>2.5</containerStartDelay>
+                <containerResetDelay>4</containerResetDelay>
+                <zIndex>150</zIndex>
+            </text>
+            <text name="SystemReleaseDate">
+                <pos>0.8 0.356</pos>
+                <size>0.35 0.21</size>
+                <text>${systemReleaseDateFormated}</text>
+                <origin>0.5 0.5</origin>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.027</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+                <letterCase>uppercase</letterCase>
+                <color>ffffff</color>
+                <container>true</container>
+                <containerVerticalSnap>true</containerVerticalSnap>
+                <containerScrollSpeed>1</containerScrollSpeed>
+                <containerStartDelay>2.5</containerStartDelay>
+                <containerResetDelay>4</containerResetDelay>
+                <zIndex>150</zIndex>
+            </text>
+            <text name="gameCounter">
+                <pos>0.21 0.75</pos>
+                <size>1 0.056</size>
+                <origin>0.5 0.5</origin>
+                <systemdata>gamecount</systemdata>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.035</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+                <color>161616</color>
+                <backgroundColor>00000000</backgroundColor>
+                <letterCase>uppercase</letterCase>
+                <zIndex>50</zIndex>
+            </text>
+            <image name="systemhelp">
+                <pos>0.525 0.95</pos>
+                <origin>0.5 0.5</origin>
+                <maxSize>0.8 0.065</maxSize>
+                <path>./help/sys_ps.png</path>
+                <zIndex>100</zIndex>  
+            </image>
+            <systemstatus name="status">
+                <pos>${statuspos}</pos>
+                <origin>0.5 0.5</origin>
+                <height>0.05</height>
+                <color>000000</color>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+                <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+                <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+                <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+                <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+                <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+                <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+            </systemstatus>
+            <clock name="menuclock">
+                <pos>0.25 0.05</pos>
+                <origin>0.5 0.5</origin>
+                <color>000000</color>
+                <fontSize>0.044</fontSize>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            </clock>
+        </view>
+        <view name="gamelist">
+            <image name="systemlistbg">
+                <pos>0.5 0.5</pos>
+                <origin>0.5 0.5</origin>
+                <size>1 1</size>
+                <path>./Assets/16-9/${gamelistbg}</path>
+                <zIndex>10</zIndex>  
+            </image>
+            <grid name="gamelistGrid">
+                <pos>0.18 0.55</pos>
+                <size>0.27 0.75</size>
+                <origin>0.5 0.5</origin>
+                <itemSize>0.27 0.07</itemSize>
+                <itemScale>1</itemScale>
+                <itemSpacing>0.022 0.02</itemSpacing>
+                <fractionalRows>false</fractionalRows>
+                <itemTransitions>animated</itemTransitions>
+                <rowTransitions>instant</rowTransitions>
+                <unfocusedItemOpacity>1.0</unfocusedItemOpacity>
+                <imageRelativeScale>0.9</imageRelativeScale>
+                <imageType>none</imageType>
+                <imageFit>contain</imageFit>
+                <backgroundImage>./Assets/${itemsbg}</backgroundImage>
+                <backgroundRelativeScale>1.0</backgroundRelativeScale>
+                <backgroundColor>ffffff</backgroundColor>
+                <selectorImage>./Assets/${itemselected}</selectorImage>
+                <selectorRelativeScale>1.1</selectorRelativeScale>
+                <selectorLayer>middle</selectorLayer>
+                <textRelativeScale>0.65</textRelativeScale>
+                <textColor>1c1c1c</textColor>
+                <textSelectedColor>ffffff</textSelectedColor>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.028</fontSize>
+                <lineSpacing>1.2</lineSpacing>
+                <fadeAbovePrimary>false</fadeAbovePrimary>
+                <textHorizontalScrolling>true</textHorizontalScrolling>
+                <textHorizontalScrollDelay>0.6</textHorizontalScrollDelay>
+            </grid>
+            <helpsystem name="help">
+                <pos>0.012 0.955</pos>
+                <textColor>${gamelistHelpColor}</textColor>
+                <iconColor>${gamelistHelpColor}</iconColor>
+                <textColorDimmed>${gamelistHelpColorDimmed}</textColorDimmed>
+                <iconColorDimmed>${gamelistHelpColorDimmed}</iconColorDimmed>
+                <fontSize>0.035</fontSize>
+            </helpsystem>
+        </view>
+
+            
+        <view name="gamelist">
+            <video name="gameVideo">
+                <maxSize>0.58 0.28</maxSize>
+                <origin>0.5 0.5</origin>
+                <pos>0.497 0.4728</pos>
+                <pillarboxes>false</pillarboxes>
+                <zIndex>100</zIndex>
+                <imageType>screenshot</imageType>
+                <interpolation>nearest</interpolation>
+                <delay>1.7</delay>
+                <scrollFadeIn>true</scrollFadeIn>
+            </video>
+            <image name="logo">
+                <pos>0.78 0.17</pos>
+                <maxSize>0.32 0.13</maxSize>
+                <origin>1 1</origin>
+                <path>${systemLogo}</path>
+            </image>
+            <image name="marquee">
+                <pos>0.495 0.78</pos>
+                <origin>0.5 0.5</origin>
+                <maxSize>0.2 0.1</maxSize>
+                <imageType>marquee</imageType>
+                <color>ffffff</color>
+                <zIndex>100</zIndex>
+            </image>
+    
+            <text name="description">
+                <pos>0.825 0.645</pos>
+                <size>0.2 0.42</size>
+                <metadata>description</metadata>
+                <origin>0.5 0.5</origin>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.025</fontSize>
+                <horizontalAlignment>left</horizontalAlignment>
+                <letterCase>uppercase</letterCase>
+                <color>${gamelistDefaultTextColor}</color>
+                <container>true</container>
+                <containerVerticalSnap>true</containerVerticalSnap>
+                <containerScrollSpeed>1</containerScrollSpeed>
+                <containerStartDelay>2.5</containerStartDelay>
+                <containerResetDelay>4</containerResetDelay>
+                <zIndex>150</zIndex>
+            </text>
+            <text name="systemNames">
+                <text>${system.name}</text>
+                <pos>0.5 0.17</pos>
+                <size>0.172 0.05</size>
+                <origin>0.5 0.5</origin>
+                <horizontalAlignment>center</horizontalAlignment>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.028</fontSize>
+                <color>000000</color>
+                <letterCase>uppercase</letterCase>
+                <container>true</container>
+                <containerType>horizontal</containerType>
+                <zIndex>60</zIndex>
+            </text>
+            <datetime name="releasedate">
+                <pos>0.796 0.247</pos>
+                <metadata>releasedate</metadata>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <fontSize>0.035</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+                <color>ffffff</color>
+            </datetime>
+            <text name="developer">
+                <size>0.2 0.05</size>
+                <pos>0.825 0.35</pos>
+                <origin>0.5 0.5</origin>
+                <metadata>developer</metadata>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.031</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+            </text>
+            <text name="genre">
+                <size>0.2 0.05</size>
+                <pos>0.825 0.39</pos>
+                <origin>0.5 0.5</origin>
+                <metadata>genre</metadata>
+                <fontPath>./core/fonts/amanojaku.otf</fontPath>
+                <fontSize>0.031</fontSize>
+                <horizontalAlignment>center</horizontalAlignment>
+            </text>
+            <rating name="rating">
+                <pos>0.435 0.22</pos>
+                <size>0 0.04</size>
+                <interpolation>nearest</interpolation>
+                <color>ffffff</color>
+                <filledPath>${ratingfilled}</filledPath>
+                <unfilledPath>${ratingempty}</unfilledPath>
+                <overlay>false</overlay>
+            </rating>
+            <badges name="badgesF">
+                <pos>0.76 0.87</pos>
+                <size>0.13 0.11</size>
+                <horizontalAlignment>center</horizontalAlignment>
+                <direction>row</direction>
+                <lines>3</lines>
+                <itemsPerLine>3</itemsPerLine>
+                <slots>favorite, completed, manual</slots>
+                <controllerPos>0.5 0.572</controllerPos>
+                <controllerSize>0.81</controllerSize>
+                <folderLinkPos>0.54 0.64</folderLinkPos>
+                <folderLinkSize>0.31</folderLinkSize>
+                <itemMargin>-1.0 0.005</itemMargin>
+                <customBadgeIcon badge="favorite">./customicons/favorite.png</customBadgeIcon>
+                <customBadgeIcon badge="completed">./customicons/completed.png</customBadgeIcon>
+                <customBadgeIcon badge="manual">./customicons/manual.png</customBadgeIcon>
+            
+            </badges>
+            <image name="systemhelp">
+                <pos>0.525 0.95</pos>
+                <origin>0.5 0.5</origin>
+                <maxSize>0.8 0.065</maxSize>
+                <path>./help/game_ps.png</path>
+                <zIndex>100</zIndex>  
+            </image>
+            <systemstatus name="status">
+                <pos>${statuspos}</pos>
+                <origin>0.5 0.5</origin>
+                <height>0.05</height>
+                <color>000000</color>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+                <customIcon icon="icon_wifi">./customicons/wifi.png</customIcon>
+                <customIcon icon="icon_bluetooth">./customicons/bluetooth.png</customIcon>
+                <customIcon icon="icon_cellular">./customicons/cellular.png</customIcon>
+                <customIcon icon="icon_battery_charging">./customicons/battery_charging.png</customIcon>
+                <customIcon icon="icon_battery_low">./customicons/battery_low.png</customIcon>
+                <customIcon icon="icon_battery_medium">./customicons/battery_medium.png</customIcon>
+                <customIcon icon="icon_battery_high">./customicons/battery_high.png</customIcon>
+            </systemstatus>
+            <clock name="menuclock">
+                <pos>0.25 0.05</pos>
+                <origin>0.5 0.5</origin>
+                <color>000000</color>
+                <fontSize>0.044</fontSize>
+                <fontPath>./core/fonts/sekaiwo.ttf</fontPath>
+            </clock>
+        </view>
+    </aspectRatio>
+
+
+
+</theme>
